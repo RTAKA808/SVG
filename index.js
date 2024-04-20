@@ -25,7 +25,7 @@ const prompts=[
         type:'list',
         name:'shape',
         message:'What shape would you like?',
-        choices:['circle', 'triangle','square']
+        choices:['Circle', 'Triangle','Square']
     },
     {
         type:'input',
@@ -43,7 +43,7 @@ error ? console.error(error) : console.log('success')
 // TODO: Create a function to initialize app
 function init(){
     inquirer.prompt(prompts)
-    .then(answers=>{
+    .then(answers=>{console.log(answers.shape)
     switch(answers.shape){
     case 'Triangle':
             return new Triangle(answers.text, answers.textColor, answers.shapeColor);
@@ -52,20 +52,17 @@ function init(){
     case 'Circle':
             return new Circle(answers.text, answers.textColor, answers.shapeColor);
 }})
-    .then(shapes=>{
-    console.log(shapes)
+    .then(stuff=>{
+    console.log(stuff)
     const svg=`
-    svg version="1.1"
+    <svg version="1.1"
     width="300" height="200"
     xmlns="http://www.w3.org/2000/svg">
 
-    ${shapes.render()};
-    ${shapes.renderText()};
-
-
-
+    ${stuff.render()};
+    ${stuff.renderText()};
 </svg>`
-    writeToFile('./examples/logo.svg', svg)
+    writeToFile('./examples/logo.svg',svg)
     })
     }
 
